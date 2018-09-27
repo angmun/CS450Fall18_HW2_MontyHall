@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Landscape alternative-->
+<!--Main fragment with required views-->
+<!--Give the user the option to start a new game or continue with a previous one-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:elevation="8dp"
+    android:layout_gravity="center"
+    tools:context=".MainFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:textStyle="bold"
+        android:textColor="#6e0a32"
+        android:textSize="50sp"
+        android:gravity="center"
+        android:layout_margin="15dp"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_button"
+        android:layout_margin="10dp"
+        android:padding="15dp"
+        android:gravity="center"
+        android:text="@string/new_text"
+        style="@style/buttons"
+        android:textSize="25sp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/continue_button"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:padding="15dp"
+        android:text="@string/continue_text"
+        style="@style/buttons"
+        android:textSize="25sp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/about_button"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:padding="15dp"
+        android:text="@string/about_text"
+        style="@style/buttons"
+        android:textSize="25sp"/>
+
+
+</LinearLayout>

@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Application theme. -->
+    <style name="MyMontyHallTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@android:color/holo_red_light</item>
+        <item name="android:colorBackground">@color/background_material_light</item>
+
+    </style>
+
+    <!--Door theme-->
+    <style name="door">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxWidth">100dp</item>
+        <item name="android:maxHeight">150dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:src">@drawable/door_options</item>
+    </style>
+
+    <!--Button theme-->
+    <style name="buttons">
+        <item name="android:background">@color/bgColor</item>
+        <item name="android:textColor">@color/txtColor</item>
+    </style>
+
+</resources>

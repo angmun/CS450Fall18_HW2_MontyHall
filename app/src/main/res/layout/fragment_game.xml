@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Game fragment with required views-->
+<!--Keep track of the score at the top-->
+<!--Prompt the user to select a door-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GameFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="30dp"
+        android:id="@+id/options">
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_column="0"
+                android:layout_row="0"
+                android:text="@string/wins"
+                android:textSize="30sp"
+                android:textColor="@color/colorPrimary"
+                android:paddingEnd="20dp"/>
+
+            <TextView
+                android:layout_column="0"
+                android:layout_row="1"
+                android:text="@string/loss"
+                android:textSize="30sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingEnd="20dp"/>
+
+            <TextView
+                android:layout_column="0"
+                android:layout_row="2"
+                android:text="@string/total"
+                android:textSize="30sp"
+                android:textColor="@color/colorAccent"
+                android:paddingEnd="20dp"/>
+
+            <TextView
+                android:layout_column="1"
+                android:layout_row="0"
+                android:text="@string/win_value"
+                android:textSize="30sp"
+                android:id="@+id/tv_wins"/>
+
+            <TextView
+                android:layout_column="1"
+                android:layout_row="1"
+                android:text="@string/loss_value"
+                android:textSize="30sp"
+                android:id="@+id/tv_losses"/>
+
+            <TextView
+                android:layout_column="1"
+                android:layout_row="2"
+                android:text="@string/total_value"
+                android:textSize="30sp"
+                android:id="@+id/tv_total"/>
+
+        </GridLayout>
+    </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_a_door"
+            android:id="@+id/prompt"
+            android:textSize="40sp"
+            android:textAllCaps="true"
+            android:textColor="#93341a"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <include layout="@layout/doors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
