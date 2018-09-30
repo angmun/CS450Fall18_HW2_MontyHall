@@ -9,12 +9,12 @@ import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 
 /**
@@ -94,10 +94,20 @@ public class MainFragment extends Fragment {
 
 
         // Initialize the new button and set an onClick listener to define the behavior when clicked.
-        View newButton = rootView.findViewById(R.id.new_button);
+        final View newButton = rootView.findViewById(R.id.new_button);
+
+        // Initialize an animation to apply to the new button.
+        Animation animate = AnimationUtils.loadAnimation(getContext(), R.anim.shake);
+
+        // Animate the button before a user selects an option.
+        newButton.startAnimation(animate);
+
         newButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // First end the animation.
+                newButton.clearAnimation();
+
                 // When the new button is clicked, we move to the game activity.
                 // Set and save a boolean value representing the state of the new button.
                 // Utilize shared preferences to maintain data for the entire application.

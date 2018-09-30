@@ -1,8 +1,5 @@
 package edu.stlawu.montyhallhw;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
@@ -123,6 +120,7 @@ public class GameFragment extends Fragment {
                     Integer.parseInt(this.losses.getText().toString());
 
             this.total.setText(String.format("%s", new_total));
+
 
         }
 
