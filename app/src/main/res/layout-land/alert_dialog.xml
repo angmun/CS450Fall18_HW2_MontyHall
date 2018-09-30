@@ -2,7 +2,7 @@
 <!--Alert Dialog Layout-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/about_title_text"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:gravity="center_horizontal"
         android:textColor="@color/colorPrimary"
         android:layout_margin="10dp"
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/about"
-        android:textSize="25sp"
+        android:textSize="18sp"
         android:textColor="@color/colorAccent"
         android:fontFamily="serif"
         android:gravity="center" />

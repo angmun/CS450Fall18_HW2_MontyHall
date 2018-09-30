@@ -1,8 +1,8 @@
 package edu.stlawu.montyhallhw;
 
-
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
@@ -14,14 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,8 +41,8 @@ public class GameFragment extends Fragment {
     public static final String CLICKBTN = "Button Clicked?";
     public static final String CLICKBTNsp = "Button Clicked?";
     public static final String PREFERENCES = "MONTY PREFERENCES";
+    public static final String NEW_CLICKED = "NEW CLICKED";
     public static final String CONTINUE_CLICKED = "CONTINUE CLICKED";
-
 
     // Declare the various views required to play the game.
     // Views with score values:
@@ -77,10 +75,8 @@ public class GameFragment extends Fragment {
     private int doorCreak = 0;
     private int drumRoll = 0;
 
-
     // Change the image displayed to a selected door.
-    private void doorSelected(int doorNo) {
-
+    private void doorSelected(final int doorNo) {
         // Change the door's image.
         buttonList.get(doorNo - 1).setImageLevel(4);
 
@@ -116,9 +112,6 @@ public class GameFragment extends Fragment {
 
     // Update the values of the scores accordingly.
     private void updateScore(int option) {
-        // Initialize an animator for the prompt.
-        Animator animate = AnimatorInflater.loadAnimator(getContext(), R.animator.countdown);
-        animate.setTarget(this.prompt);
 
         if (option == 6) {
             // The player scored a car!
@@ -131,10 +124,9 @@ public class GameFragment extends Fragment {
 
             this.total.setText(String.format("%s", new_total));
 
-            // Animate the prompt.
-            animate.start();
+        }
 
-        } else {
+        else {
             // The player is eating goat!
             int new_loss = Integer.parseInt(this.losses.getText().toString()) + 1;
 
@@ -144,9 +136,6 @@ public class GameFragment extends Fragment {
                     Integer.parseInt(this.losses.getText().toString());
 
             this.total.setText(String.format("%s", new_total));
-
-            // Animate the total value.
-            animate.start();
         }
     }
 
@@ -352,12 +341,30 @@ public class GameFragment extends Fragment {
         }
 
         // Check for saved shared preferences as well.
-        SharedPreferences preferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor pref_edit = getActivity().getSharedPreferences(PREFERENCES,
+                Context.MODE_PRIVATE).edit();
+
+        // Continue button clicked.
         if(preferences.getBoolean(CONTINUE_CLICKED, false)){
             this.wins.setText(preferences.getString(WINSsp, "0"));
             this.losses.setText(preferences.getString(LOSSESsp, "0"));
             this.total.setText(preferences.getString(TOTALsp, "0"));
             this.clicked = preferences.getBoolean(CLICKBTNsp, false);
+
+            // Reset the continue_clicked value.
+            pref_edit.putBoolean(CONTINUE_CLICKED, false).apply();
+        }
+
+        // New button clicked.
+        if(preferences.getBoolean(NEW_CLICKED, false)){
+            this.wins.setText("0");
+            this.losses.setText("0");
+            this.total.setText("0");
+            this.clicked = preferences.getBoolean(CLICKBTNsp, false);
+
+            // Reset the new_clicked value.
+            pref_edit.putBoolean(NEW_CLICKED, false).apply();
         }
 
         // Set up onClickListeners for the various buttons:
@@ -367,6 +374,9 @@ public class GameFragment extends Fragment {
                 if (!clicked) {
                     // Select the door but permit the user to switch doors.
                     doorSelected(1);
+
+                    // Animate the image button.
+                    // TODO
 
                     // Update clicked.
                     clicked = true;
@@ -424,6 +434,22 @@ public class GameFragment extends Fragment {
     }
 
 
+    // Save data for use between activities to implement the continue button.
+    // Save data as user leaves activity through back button.
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Utilize shared preferences to maintain data for the entire application.
+        SharedPreferences.Editor pref_edit = getActivity().getSharedPreferences(PREFERENCES,
+                Context.MODE_PRIVATE).edit();
+
+        pref_edit.putString(WINSsp, wins.getText().toString()).apply();
+        pref_edit.putString(LOSSESsp, losses.getText().toString()).apply();
+        pref_edit.putString(TOTALsp, total.getText().toString()).apply();
+        pref_edit.putBoolean(CLICKBTNsp, clicked).apply();
+    }
+
+
     // Save data in case of a configuration change.
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -436,15 +462,6 @@ public class GameFragment extends Fragment {
 
         // Preserve the status of the image button clicks.
         outState.putBoolean(CLICKBTN, clicked);
-
-        // Utilize shared preferences to maintain data for the entire application.
-        SharedPreferences.Editor preferences = getActivity().getSharedPreferences(PREFERENCES,
-                Context.MODE_PRIVATE).edit();
-
-        preferences.putString(WINSsp, wins.getText().toString()).apply();
-        preferences.putString(LOSSESsp, losses.getText().toString()).apply();
-        preferences.putString(TOTALsp, total.getText().toString()).apply();
-        preferences.putBoolean(CLICKBTNsp, clicked).apply();
     }
 }
 

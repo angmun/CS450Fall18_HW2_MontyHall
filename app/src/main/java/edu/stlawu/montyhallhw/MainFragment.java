@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,11 +70,11 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Set up an alert dialog to display information about the game.
-                // Use the application's custom theme
+                // Use a custom theme for the alert dialog.
                 AlertDialog.Builder builder =
                         new AlertDialog.Builder(getActivity());
 
-                // Set up the alert using methods from the builder.
+                // Set the layout for the alert dialog.
                 builder.setView(R.layout.alert_dialog);
 
                 // Set up button on alert dialog.
@@ -100,9 +101,9 @@ public class MainFragment extends Fragment {
                 // When the new button is clicked, we move to the game activity.
                 // Set and save a boolean value representing the state of the new button.
                 // Utilize shared preferences to maintain data for the entire application.
-                SharedPreferences.Editor preferences = getActivity().getSharedPreferences(PREFERENCES,
+                SharedPreferences.Editor pref_edit = getActivity().getSharedPreferences(PREFERENCES,
                         Context.MODE_PRIVATE).edit();
-                preferences.putBoolean(NEW_CLICKED, true).apply();
+                pref_edit.putBoolean(NEW_CLICKED, true).apply();
 
                 // Move to the game activity.
                 Intent intent = new Intent(getActivity(), GameActivity.class);
@@ -119,9 +120,9 @@ public class MainFragment extends Fragment {
                 // When the continue button is clicked, we move to the game activity.
                 // Set and save a boolean value representing the state of the continue button.
                 // Utilize shared preferences to maintain data for the entire application.
-                SharedPreferences.Editor preferences = getActivity().getSharedPreferences(PREFERENCES,
+                SharedPreferences.Editor pref_edit = getActivity().getSharedPreferences(PREFERENCES,
                         Context.MODE_PRIVATE).edit();
-                preferences.putBoolean(CONTINUE_CLICKED, true).apply();
+                pref_edit.putBoolean(CONTINUE_CLICKED, true).apply();
 
                 // Move to the game activity.
                 Intent intent = new Intent(getActivity(), GameActivity.class);
@@ -131,7 +132,6 @@ public class MainFragment extends Fragment {
 
         return rootView;
     }
-
 
 
     // TODO: Rename method, update argument and hook method into UI event
