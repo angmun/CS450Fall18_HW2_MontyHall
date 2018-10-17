@@ -373,9 +373,6 @@ public class GameFragment extends Fragment {
                     // Select the door but permit the user to switch doors.
                     doorSelected(1);
 
-                    // Animate the image button.
-                    // TODO
-
                     // Update clicked.
                     clicked = true;
                 } else {
